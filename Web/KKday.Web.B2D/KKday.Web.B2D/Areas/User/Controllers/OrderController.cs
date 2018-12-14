@@ -13,6 +13,7 @@ using KKday.Web.B2D.BE.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -75,9 +76,18 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
                 var UserData = JsonConvert.DeserializeObject<B2dAccount>(AesCryptHelper.aesDecryptBase64(aesUserData, Website.Instance.AesCryptKey));
 
                 var orders = OrderRepository.GetOrderDetail(UserData, mid);
+                //JObject jsonObject = JObject.Parse(orders);
+
+                var info = OrderRepository.GetOrderInfo(orders["order_info"]);
+                var cus = OrderRepository.GetOrderCus(orders["order_cusList"]);
+                var module = OrderRepository.GetOrderModule(orders["order_modules"]);
+
+                ViewData["info"] = info;
+                ViewData["cus"] = cus;
+                ViewData["module"] = module;
 
                 jsonData.Add("status", "OK");
-                jsonData["content"] = "";//await this.RenderViewAsync<OrderListModel>("OrderList", orders, true);
+                //jsonData["content"] = await this.RenderViewAsync<OrderListModel>("OrderList", orders, true);
             }
             catch(Exception ex)
             {
