@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using KKday.Web.B2D.BE.Models.DataModel;
 using KKday.Web.B2D.EC.Models.Model.Account;
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.Order;
 using KKday.Web.B2D.BE.Proxy;
 using Newtonsoft.Json.Linq;
 using KKday.Web.B2D.Models.BE.Model.Order;
@@ -52,8 +49,6 @@ namespace KKday.Web.B2D.BE.Models.Repository
                 });
             }
 
-
-
             return order_list;
         }
 
@@ -78,70 +73,112 @@ namespace KKday.Web.B2D.BE.Models.Repository
         }
 
         //訂單明細左邊&上方欄
-        public static JObject GetOrderInfo(JToken obj)
+        public static OrderInfoModel GetOrderInfo(JToken obj)
         {
-            JObject order_info = new JObject();
+            OrderInfoModel order_info = new OrderInfoModel();
 
             //左邊欄
-            order_info.Add("Prod_Name", obj["productName"].ToString());
-            order_info.Add("Pkg_Name", obj["packageName"].ToString());
-            order_info.Add("Event", obj["eventTime"].ToString());
-            order_info.Add("Order_SDate", obj["begLstGoDtGMT"].ToString());
-            order_info.Add("Adt_Qty", obj["price1Qty"].ToString());
-            order_info.Add("Chd_Qty", obj["price2Qty"].ToString());
-            order_info.Add("Inf_Qty", obj["price3Qty"].ToString());
-            order_info.Add("Old_Qty", obj["price4Qty"].ToString());
-            order_info.Add("Adt_Price", obj["price1"].ToString());
-            order_info.Add("Chd_Price", obj["price2"].ToString());
-            order_info.Add("Inf_Price", obj["price3"].ToString());
-            order_info.Add("Old_Price", obj["price4"].ToString());
-            order_info.Add("TotalPrice", obj["pmgwCurrPriceTotal"].ToString());
-            order_info.Add("TotalPay", obj["currPricePay"].ToString());
-            order_info.Add("CancelFee", obj["pmgwCurrFeeCancel"].ToString());
-            order_info.Add("RefundPrice", obj["pmgwCurrPriceRefund"].ToString());
+            if(obj["productName"]!=null) order_info.PROD_NAME = obj["productName"].ToString();
+            if (obj["packageName"] != null) order_info.PKG_NAME = obj["packageName"].ToString();
+            if (obj["eventTime"] != null) order_info.EVENT = obj["eventTime"].ToString();
+            if (obj["begLstGoDtGMT"] != null) order_info.ORDER_SDATE = obj["begLstGoDtGMT"].ToString();
+            if (obj["price1Qty"] != null) order_info.ADT_QTY = obj["price1Qty"].ToString();
+            if (obj["price2Qty"] != null) order_info.CHD_QTY = obj["price2Qty"].ToString();
+            if (obj["price3Qty"] != null) order_info.INF_QTY = obj["price3Qty"].ToString();
+            if (obj["price4Qty"] != null) order_info.OLD_QTY = obj["price4Qty"].ToString();
+            if (obj["price1"] != null) order_info.ADT_PRICE = obj["price1"].ToString();
+            if (obj["price2"] != null) order_info.CHD_PRICE = obj["price2"].ToString();
+            if (obj["price3"] != null) order_info.INF_PRICE = obj["price3"].ToString();
+            if (obj["price4"] != null) order_info.OLD_PRICE = obj["price4"].ToString();
+            if (obj["pmgwCurrPriceTotal"] != null) order_info.TOTALPRICE = obj["pmgwCurrPriceTotal"].ToString();
+            if (obj["currPricePay"] != null) order_info.TOTALPAY = obj["currPricePay"].ToString();
+            if (obj["pmgwCurrFeeCancel"] != null) order_info.CANCELFEE = obj["pmgwCurrFeeCancel"].ToString();
+            if (obj["pmgwCurrPriceRefund"] != null) order_info.REFUNDPRICE = obj["pmgwCurrPriceRefund"].ToString();
 
             //上方欄
-            order_info.Add("Order_Mid", obj["orderMid"].ToString());
-            order_info.Add("conn_Name", string.Format("{0}{1}", obj["contactLastname"], obj["contactFirstname"]));
-            order_info.Add("conn_email", obj["contactEmail"].ToString());
-            order_info.Add("conn_tel", string.Format("{0}{1}{2}","+",obj["telCountryCd"], obj["contactTel"]));
-            order_info.Add("Crt_date", obj["userCrtDtGMTNm"].ToString());
+            if (obj["orderMid"] != null) order_info.ORDER_MID = obj["orderMid"].ToString();
+            if (obj["contactLastname"] != null && obj["contactFirstname"] != null) order_info.CONN_NAME = string.Format("{0}{1}", obj["contactLastname"], obj["contactFirstname"]);
+            if (obj["contactEmail"] != null) order_info.CONN_EMAIL = obj["contactEmail"].ToString();
+            if (obj["telCountryCd"] != null && obj["contactTel"] != null) order_info.CONN_TEL = string.Format("{0}{1}{2}", "+", obj["telCountryCd"], obj["contactTel"]);
+            if (obj["userCrtDtGMTNm"] != null) order_info.CRT_DATE = obj["userCrtDtGMTNm"].ToString();
 
             return order_info;
         }
 
         //訂單明細中下方的「旅客資料」
-        public static List<JObject> GetOrderCus(JToken obj)
+        public static List<OMDL_CUST_DATA> GetOrderCus(JToken obj)
         {
-            List<JObject> order_cus = new List<JObject>();
-            JObject cus = new JObject();
+            List<OMDL_CUST_DATA> order_cus = new List<OMDL_CUST_DATA>();
+            OMDL_CUST_DATA cus = new OMDL_CUST_DATA();
 
-
-            for (var i = 0; i < obj.Count(); i++)
+            foreach (var item in obj)
             {
-                if (obj[i]["englishName"] != null) cus.Add("Name", string.Format("{0}{1}{2}", obj[i]["englishName"]["lastName"]," ", obj[i]["englishName"]["firstName"]));
-                if (obj[i]["gender"] != null) cus.Add("Gender", obj[i]["gender"].ToString());
-                if (obj[i]["meal"] != null) cus.Add("MealName", obj[i]["meal"]["mealName"].ToString());
-                //if (obj[i]["meal"] != null) cus.Add("FoodAllergy", obj["meal"]["foodAllergy"]["allergenList"].ToString());
-                if (obj[i]["nationality"] != null)
+                if (item["englishName"] != null)
                 {
-                    if (obj[i]["nationality"]["nationalityCode"] != null) cus.Add("Nation", obj[i]["nationality"]["nationalityCode"].ToString());
-                    if (obj[i]["nationality"]["TWIdentity_number"] != null) cus.Add("idTW", obj[i]["nationality"]["TWIdentity_number"].ToString());
-                    if (obj[i]["nationality"]["MTPNumber"] != null) cus.Add("idCN", obj[i]["nationality"]["MTPNumber"].ToString());
-                    if (obj[i]["nationality"]["HKMOIdentityNumber"] != null) cus.Add("idHK", obj[i]["nationality"]["HKMOIdentityNumber"].ToString());
+                    if (item["englishName"]["lastName"] != null && item["englishName"]["firstName"] != null)
+                    {
+                        var lastName = item["englishName"]["lastName"];
+                        var firstName = item["englishName"]["firstName"];
+                        cus.englishName = string.Format("{0}{1}{2}", lastName, " ", firstName);
+                    }
                 }
-                if (obj[i]["birthday"] != null) cus.Add("Birthday", obj[i]["birthday"].ToString());
+                if (item["gender"] != null) cus.gender = item["gender"].ToString();
+                if (item["meal"] != null && item["meal"]["mealName"] != null) cus.meal = item["meal"]["mealName"].ToString();
+                if (item["nationality"] != null)
+                {
+                    nationalityInfo national = new nationalityInfo();
 
-                if (obj[i]["passport"] != null)
-                {
-                    if (obj[i]["passport"]["passportNo"] != null) cus.Add("Passport", obj[i]["passport"]["passportNo"].ToString());
-                    if (obj[i]["passport"]["passportExpDate"] != null) cus.Add("PassportDate", obj[i]["passport"]["passportExpDate"].ToString());
+                    if (item["nationality"]["nationalityCode"] != null) national.nationalityCode = item["nationality"]["nationalityCode"].ToString();
+                    if (item["nationality"]["TWIdentity_number"] != null) national.TWIdentity_number = item["nationality"]["TWIdentity_number"].ToString();
+                    if (item["nationality"]["MTPNumber"] != null) national.MTPNumber = item["nationality"]["MTPNumber"].ToString();
+                    if (item["nationality"]["HKMOIdentityNumber"] != null) national.HKMOIdentityNumber = item["nationality"]["HKMOIdentityNumber"].ToString();
+
+                    cus.nationality = national;
                 }
-                if (obj[i]["localName"] != null) cus.Add("LocalName", string.Format("{0}{1}", obj[i]["localName"]["lastName"], obj[i]["localName"]["firstName"]));
-                if (obj[i]["height"] != null) cus.Add("Height", string.Format("{0}{1}", obj[i]["height"]["value"], obj[i]["height"]["unit"]));
-                if (obj[i]["weight"] != null) cus.Add("Weight", string.Format("{0}{1}", obj[i]["weight"]["value"], obj[i]["weight"]["unit"]));
-                //if (obj["shoeSize"] != null) cus.Add("ShoeSize", string.Format("{0}{1}{2}", obj[i]["shoeSize"]["type"], obj[i]["shoeSize"]["value"], obj[i]["shoeSize"]["unit"]));
-                //if (obj["glassDiopter"] != null) cus.Add("GlassDegree", obj[i]["glassDiopter"].ToString());
+                if (item["birthday"] != null) cus.birthday = item["birthday"].ToString();
+                if (item["passport"] != null)
+                {
+                    passportInfo pass = new passportInfo();
+
+                    if (item["passport"]["passportNo"] != null) pass.passportNo = item["passport"]["passportNo"].ToString();
+                    if (item["passport"]["passportExpDate"] != null) pass.passportExpDate = item["passport"]["passportExpDate"].ToString();
+
+                    cus.passport = pass;
+                }
+                if (item["localName"] != null)
+                {
+                    if (item["localName"]["lastName"] != null && item["localName"]["firstName"] != null)
+                    {
+                        var lastName = item["localName"]["lastName"];
+                        var firstName = item["localName"]["firstName"];
+                        cus.localName = string.Format("{0}{1}{2}", lastName, " ", firstName);
+                    }
+                }
+                if (item["height"] != null)
+                {
+                    if (item["height"]["value"] != null && item["height"]["unit"] != null)
+                    {
+                        cus.height = string.Format("{0}{1}", item["height"]["value"], item["height"]["unit"]);
+                    }
+                }
+                if (item["weight"] != null)
+                {
+                    if (item["weight"]["value"] != null && item["weight"]["unit"] != null)
+                    {
+                        cus.weight = string.Format("{0}{1}", item["weight"]["value"], item["weight"]["unit"]);
+                    }
+                }
+                if (item["shoeSize"] != null)
+                {
+                    if (item["shoeSize"]["type"] != null && item["shoeSize"]["unit"] != null && item["shoeSize"]["value"] != null)
+                    {
+                        string type = item["shoeSize"]["type"].ToString();
+                        string unit = item["shoeSize"]["unit"].ToString();
+                        double? value = (double?)item["shoeSize"]["value"];
+                        cus.shoeSize = string.Format("{0}{1}{2}", type, value, unit);
+                    }
+                }
+                if (item["glassDiopter"] != null) cus.glassDiopter = (double?)item["glassDiopter"];
 
                 order_cus.Add(cus);
             }
@@ -275,11 +312,11 @@ namespace KKday.Web.B2D.BE.Models.Repository
                         pickUpInfo pick = new pickUpInfo();
                         if (item["module_data"]["designatedByCustomer"]["pickUp"] != null)
                         {
-                            if (item["module_data"]["designatedByCustomer"]["pickUp"]["location"] != null) pick.location = (string)item["module_data"][""][""][""];
-                            if (item["module_data"]["designatedByCustomer"]["pickUp"]["dropOff"] != null) pick.time = (string)item["module_data"][""][""][""];
+                            if (item["module_data"]["designatedByCustomer"]["pickUp"]["location"] != null) pick.location = (string)item["module_data"]["designatedByCustomer"]["pickUp"]["location"];
+                            if (item["module_data"]["designatedByCustomer"]["pickUp"]["time"] != null) pick.time = (string)item["module_data"]["designatedByCustomer"]["pickUp"]["time"];
                             cus.pickUp = pick;
                         }
-                        if (item["module_data"][""][""] != null) cus.dropOff = (string)item["module_data"][""][""];
+                        if (item["module_data"]["designatedByCustomer"]["dropOff"] != null) cus.dropOff = (string)item["module_data"]["designatedByCustomer"]["dropOff"]["location"];
 
                         shuttle.designatedByCustomer = cus;
                     }
