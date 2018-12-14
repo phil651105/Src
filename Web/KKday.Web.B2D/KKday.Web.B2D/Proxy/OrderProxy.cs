@@ -4,9 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using KKday.Web.B2D.BE.App_Code;
 using KKday.Web.B2D.BE.Models.DataModel;
-using KKday.Web.B2D.BE.Models.Model.Order;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace KKday.Web.B2D.BE.Proxy
 {

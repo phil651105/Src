@@ -1,12 +1,14 @@
-﻿@using KKday.Web.B2D.BE.Models.Model.Order
+﻿@using KKday.Web.B2D.Models.BE.Model.Order
 @using Resources
 @inject ILocalizer localizer
+@model OrderInfoModel
 @{
-    Layout = "_LayoutMain";
-    var info = ViewData["info"];
+    Layout = "_LayoutShell";
+    var info = (OrderInfoModel)ViewData["info"];
+    var cus = (List<OMDL_CUST_DATA>)ViewData["cus"];
+    var module = (List<OMDLModuleModel>)ViewData["module"];
 }
 
-<div class="page-wrap member-wrap order-detail-wrap">
     <div class="container">
         <div class="breadcrumb">
             <a href="order_list.html"><i class="fa fa-angle-left fa-lg"></i>返回訂單管理</a>
@@ -28,7 +30,8 @@
 
                         <div class="fill-group">
                             <label>套餐</label>
-                            Option A
+
+
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-lg-7">
@@ -1236,8 +1239,7 @@
             </div>
         </div>
     </div>
-</div>
-
+    
 <!-- Voucher Modal Start-->
 <div class="modal fade" id="voucher-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md">

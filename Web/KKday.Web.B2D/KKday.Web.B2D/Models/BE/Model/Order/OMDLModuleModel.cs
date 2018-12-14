@@ -18,7 +18,7 @@ namespace KKday.Web.B2D.Models.BE.Model.Order
     {
         public string englishName { get; set; }              //護照姓名
         public string gender { get; set; }                   //性別
-        public mealInfo meal { get; set; }                   //餐食
+        public string meal { get; set; }                   //餐食
         public nationalityInfo nationality { get; set; }     //國籍資料
         public string birthday { get; set; }                 //出生年月日
         public passportInfo passport { get; set; }           //護照資訊
