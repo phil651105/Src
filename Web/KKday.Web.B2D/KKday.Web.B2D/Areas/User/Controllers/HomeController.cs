@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 using KKday.Web.B2D.BE.Filters;
 using KKday.Web.B2D.BE.AppCode.DAL.Company;
 using KKday.Web.B2D.BE.App_Code;
-using KKday.Web.B2D.BE.Models.Model.Company;
+using KKday.Web.B2D.Models.BE.Model.Company;
 using Microsoft.AspNetCore.Http.Features;
 
 namespace KKday.Web.B2D.BE.Areas.User.Controllers

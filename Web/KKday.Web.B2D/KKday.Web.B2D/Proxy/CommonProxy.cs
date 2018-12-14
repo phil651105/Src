@@ -4,7 +4,7 @@ using System.Data;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using KKday.Web.B2D.BE.App_Code;
-using KKday.Web.B2D.BE.Models.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Npgsql;

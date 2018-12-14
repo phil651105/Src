@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using KKday.Web.B2D.BE.App_Code;
-using KKday.Web.B2D.BE.Models.Model.ListPrice;
+using KKday.Web.B2D.Models.BE.Model.ListPrice;
 using Npgsql;
 
 namespace KKday.Web.B2D.BE.AppCode.DAL.ListPrice

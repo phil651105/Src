@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using KKday.Web.B2D.BE.AppCode.DAL.ListPrice;
 using KKday.Web.B2D.BE.AppCode.DAL.PriceSetting;
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.PriceSetting;
+using KKday.Web.B2D.BE.Models.Repository;
+using KKday.Web.B2D.Models.BE.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.PriceSetting;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using Resources;
 
-namespace KKday.Web.B2D.BE.Models.Repository
+namespace KKday.Web.B2D.Models.BE.Repository
 {
     public class PriceSettingRepository
     {

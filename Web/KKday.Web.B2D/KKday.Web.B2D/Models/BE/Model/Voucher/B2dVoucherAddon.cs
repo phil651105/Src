@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KKday.Web.B2D.BE.Models.Model.Voucher
+namespace KKday.Web.B2D.Models.BE.Model.Voucher
 {
     public class B2dVoucherAddon
     {

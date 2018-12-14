@@ -1,8 +1,8 @@
 ﻿using System;
 using KKday.Web.B2D.BE.AppCode.DAL.Voucher;
-using KKday.Web.B2D.BE.Models.Model.Voucher;
+using KKday.Web.B2D.Models.BE.Model.Voucher;
 
-namespace KKday.Web.B2D.BE.Models.Repository
+namespace KKday.Web.B2D.Models.BE.Repository
 {
     public class VouchAddonRepository
     {

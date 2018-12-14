@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KKday.Web.B2D.BE.Models.Model.Common
+namespace KKday.Web.B2D.Models.BE.Model.Common
 {
     // 國家與國碼
     public class CountryArea

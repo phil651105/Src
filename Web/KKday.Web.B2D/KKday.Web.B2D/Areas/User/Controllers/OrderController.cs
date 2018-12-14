@@ -7,13 +7,11 @@ using KKday.Web.B2D.BE.App_Code;
 using KKday.Web.B2D.BE.Filters;
 using KKday.Web.B2D.BE.Models.DataModel;
 using KKday.Web.B2D.EC.Models.Model.Account;
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.Order;
 using KKday.Web.B2D.BE.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using KKday.Web.B2D.Models.BE.Model.Order;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -63,11 +61,10 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
         }
 
         // 單一訂單
-        public IActionResult GetOrderDetail(string mid)
+        public IActionResult OrderDetail(string id)
         {
             //先用假訂單
-            mid = "18KK112875437";
-
+            id = "18KK112875437";
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
 
             try
@@ -75,19 +72,15 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
                 var aesUserData = User.FindFirst(ClaimTypes.UserData).Value;
                 var UserData = JsonConvert.DeserializeObject<B2dAccount>(AesCryptHelper.aesDecryptBase64(aesUserData, Website.Instance.AesCryptKey));
 
-                var orders = OrderRepository.GetOrderDetail(UserData, mid);
-                //JObject jsonObject = JObject.Parse(orders);
+                var orders = OrderRepository.GetOrderDetail(UserData, id);
+                //JObject jsonObject = JObject.Parse(orders); 
 
-                var info = OrderRepository.GetOrderInfo(orders["order_info"]);
-                var cus = OrderRepository.GetOrderCus(orders["order_cusList"]);
-                var module = OrderRepository.GetOrderModule(orders["order_modules"]);
-
-                ViewData["info"] = info;
-                ViewData["cus"] = cus;
-                ViewData["module"] = module;
+                ViewData["info"] = OrderRepository.GetOrderInfo(orders["order_info"]);
+                ViewData["cus"] = OrderRepository.GetOrderCus(orders["order_cusList"]);
+                ViewData["module"] = OrderRepository.GetOrderModule(orders["order_modules"]);
 
                 jsonData.Add("status", "OK");
-                //jsonData["content"] = await this.RenderViewAsync<OrderListModel>("OrderList", orders, true);
+                //jsonData["content"] =await this.RenderViewAsync<OrderListModel>("OrderList", orders, true);
             }
             catch(Exception ex)
             {
@@ -96,7 +89,7 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
                 jsonData.Add("content", ex.Message);
             }
 
-            return Json(jsonData);
+            return View();
         }
 
         [HttpPost]

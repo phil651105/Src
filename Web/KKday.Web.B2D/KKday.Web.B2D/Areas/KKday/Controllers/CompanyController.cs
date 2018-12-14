@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using KKday.Web.B2D.BE.App_Code;
 using KKday.Web.B2D.BE.Filters;
-using KKday.Web.B2D.BE.Models.Model.Company;
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.PriceSetting;
+using KKday.Web.B2D.Models.BE.Model.Company;
+using KKday.Web.B2D.Models.BE.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.PriceSetting;
 using KKday.Web.B2D.BE.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +18,8 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using KKday.Web.B2D.BE.Models.Model.Voucher;
+using KKday.Web.B2D.Models.BE.Model.Voucher;
+using KKday.Web.B2D.Models.BE.Repository;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

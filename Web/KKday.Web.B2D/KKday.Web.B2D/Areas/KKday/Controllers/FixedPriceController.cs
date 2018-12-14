@@ -4,14 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using KKday.Web.B2D.BE.Areas.KKday.Models.DataModel.FixedPrice;
 using KKday.Web.B2D.BE.Filters;
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.FixedPrice;
+using KKday.Web.B2D.Models.BE.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.FixedPrice;
 using KKday.Web.B2D.BE.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Resources;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

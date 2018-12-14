@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KKday.Web.B2D.BE.Models.Model.PriceSetting
+namespace KKday.Web.B2D.Models.BE.Model.PriceSetting
 {
     [Serializable]
     public class B2dDiscountMst

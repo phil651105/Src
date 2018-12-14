@@ -1,5 +1,5 @@
-﻿@using KKday.Web.B2D.BE.Models.Model.Common
-@using KKday.Web.B2D.BE.Models.Model.FixedPrice
+﻿@using KKday.Web.B2D.Models.BE.Model.Common
+@using KKday.Web.B2D.Models.BE.Model.FixedPrice
 @using Resources
 @inject ILocalizer localizer
 @model List<FixedPricePackageEx>
@@ -14,16 +14,16 @@
 else
 {
     <div class="row">
-        <div class="col-sm-12"> 
-         
+        <div class="col-sm-12">
 
-       </div>
+
+        </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12 table-responsive">
 
-            <table class="table data-tablesaw tablesaw-stack" data-tablesaw-mode="stack"> 
+            <table class="table data-tablesaw tablesaw-stack" data-tablesaw-mode="stack">
                 <thead>
                     <tr>
                         <th><input type="checkbox" class="checkall" /></th>
@@ -34,37 +34,37 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var pkg in Model)
-                {
-                    foreach (var price in pkg.Prices)
+                    @foreach (var pkg in Model)
                     {
-                        var seq = pkg.Prices.IndexOf(price);
-                    <tr>
-                        @if (seq == 0)
+                        foreach (var price in pkg.Prices)
                         {
-                        <td rowspan="@pkg.Prices.Count()"><input type="checkbox" value="@pkg.XID" class="checkitem" /></td>
-                        <td rowspan="@pkg.Prices.Count()"> 
-                            <label>@pkg.PKG_NAME</label><br />
-                            <span>@pkg.ONLINE_SDATE.ToString("yyyy-MM-dd") ~ @pkg.ONLINE_EDATE.ToString("yyyy-MM-dd")</span> 
-                        </td>
+                            var seq = pkg.Prices.IndexOf(price);
+                            <tr>
+                                @if (seq == 0)
+                                {
+                                    <td rowspan="@pkg.Prices.Count()"><input type="checkbox" value="@pkg.XID" class="checkitem" /></td>
+                                    <td rowspan="@pkg.Prices.Count()">
+                                        <label>@pkg.PKG_NAME</label><br />
+                                        <span>@pkg.ONLINE_SDATE.ToString("yyyy-MM-dd") ~ @pkg.ONLINE_EDATE.ToString("yyyy-MM-dd")</span>
+                                    </td>
+                                }
+                                <td>@price.PRICE_COND</td>
+                                <td><input type="text" value="@price.PRICE" class="upd-price" /> </td>
+                                <td>
+                                    <button class="btn btn-success btn-xs update-btn" onclick="UpdPriceSetting(@price.XID);"
+                                            data-title="Update" data-toggle="modal" data-target="#update" disabled>
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </button>
+
+                                    <button class="btn btn-danger btn-xs" onclick="DelPriceSetting(@price.XID);"
+                                            data-title="Delete" data-toggle="modal" data-target="#delete">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </td>
+                            </tr>
                         }
-                        <td>@price.PRICE_COND</td>
-                        <td><input type="text" value="@price.PRICE" class="upd-price" /> </td>
-                        <td>
-                            <button class="btn btn-success btn-xs update-btn" onclick="UpdPriceSetting(@price.XID);"
-                                data-title="Update" data-toggle="modal" data-target="#update" disabled>
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </button>
 
-                            <button class="btn btn-danger btn-xs" onclick="DelPriceSetting(@price.XID);"
-                                data-title="Delete" data-toggle="modal" data-target="#delete">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </td>
-                    </tr>   
-                   }
-
-                }
+                    }
 
                 </tbody>
             </table>
@@ -72,7 +72,7 @@ else
         </div>
     </div>
 
-     
+
     <script type="text/javascript">
 
     // Don't collapse on checkbox click
@@ -129,4 +129,3 @@ else
 
     </script>
 }
- 
