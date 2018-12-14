@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using KKday.Web.B2D.BE.App_Code;
-using KKday.Web.B2D.BE.Models.Model.Voucher;
+using KKday.Web.B2D.Models.BE.Model.Voucher;
 using Npgsql;
 
 namespace KKday.Web.B2D.BE.AppCode.DAL.Voucher

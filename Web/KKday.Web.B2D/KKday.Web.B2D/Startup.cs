@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using KKday.Web.B2D.BE.App_Code;
 using Resources;
+using KKday.Web.B2D.Models.BE.Repository;
 
 namespace KKday.Web.B2D.EC
 {

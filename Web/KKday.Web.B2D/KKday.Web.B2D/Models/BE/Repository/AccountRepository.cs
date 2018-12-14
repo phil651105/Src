@@ -3,7 +3,7 @@ using KKday.Web.B2D.BE.AppCode;
 using KKday.Web.B2D.BE.AppCode.DAL.Account;
 using KKday.Web.B2D.BE.AppCode.DAL.RegisterDAL;
 using KKday.Web.B2D.EC.Models.Model.Account;
-using KKday.Web.B2D.BE.Models.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.Common;
 using KKday.Web.B2D.EC.AppCode;
 using KKday.Web.B2D.EC.AppCode.DAL.Account;
 using Resources;

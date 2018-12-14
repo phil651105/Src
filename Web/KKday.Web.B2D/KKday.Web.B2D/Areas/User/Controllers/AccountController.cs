@@ -9,7 +9,7 @@ using KKday.Web.B2D.BE.AppCode;
 using KKday.Web.B2D.BE.Commons;
 using KKday.Web.B2D.BE.Filters;
 using KKday.Web.B2D.EC.Models.Model.Account;
-using KKday.Web.B2D.BE.Models.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.Common;
 using KKday.Web.B2D.BE.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Resources;
 using KKday.Web.B2D.EC.Models.Repostory.Account;
+using KKday.Web.B2D.Models.BE.Repository;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

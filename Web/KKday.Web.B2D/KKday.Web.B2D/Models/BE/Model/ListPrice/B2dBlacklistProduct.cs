@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KKday.Web.B2D.BE.Models.Model.ListPrice
+namespace KKday.Web.B2D.Models.BE.Model.ListPrice
 {
     [Serializable]
     public class B2dBlacklistProduct

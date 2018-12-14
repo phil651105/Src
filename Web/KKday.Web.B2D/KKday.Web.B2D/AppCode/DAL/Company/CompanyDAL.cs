@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using KKday.Web.B2D.BE.App_Code;
 using KKday.Web.B2D.BE.Areas.KKday.Models.DataModel;
-using KKday.Web.B2D.BE.Models.Model.Company;
+using KKday.Web.B2D.Models.BE.Model.Company;
 using Npgsql;
 
 namespace KKday.Web.B2D.BE.AppCode.DAL.Company

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using KKday.Web.B2D.BE.App_Code;
-using KKday.Web.B2D.BE.Models.Model.Package;
+using KKday.Web.B2D.Models.BE.Model.Package;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
