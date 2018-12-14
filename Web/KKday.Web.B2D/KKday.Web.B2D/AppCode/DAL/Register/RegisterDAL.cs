@@ -21,14 +21,16 @@ namespace KKday.Web.B2D.EC.AppCode.DAL.Register
 
                 string sqlStmt = @"INSERT INTO b2b.b2d_company(
  status, comp_coop_mode, payment_type, manager_account_xid, comp_name, comp_url, comp_license,
- comp_license_2, comp_country, comp_locale, comp_currency, comp_invoice, comp_tel_country_code, 
- comp_tel, contact_user_email, comp_address, charge_man_first, charge_man_last, contact_user, crt_user, 
- crt_datetime, charge_man_gender, comp_timezone)
+ comp_license2, comp_country, comp_locale, comp_currency, comp_invoice, comp_tel_country_code, 
+ comp_tel, contact_user_email, comp_address, charge_man_first, charge_man_last, contact_user,
+ charge_man_gender, comp_timezone,vou_logo_url,vou_name,vou_tel,vou_email,vou_address,vou_description,
+ crt_user, crt_datetime)
 VALUES (:status, :comp_coop_mode, :payment_type, :manager_account_xid, :comp_name, :comp_url, :comp_license,
  :comp_license_2, :comp_country, :comp_locale, :comp_currency, :comp_invoice, :comp_tel_country_code, :comp_tel,
- :contact_user_email, :comp_address, :charge_man_first, :charge_man_last, :contact_user, :crt_user, now(), 
- :charge_man_gender, :comp_timezone);
-SELECT currval('b2b.b2d_company_xid_seq') AS new_comp_xid ;
+ :contact_user_email, :comp_address, :charge_man_first, :charge_man_last, :contact_user, 
+ :charge_man_gender, :comp_timezone,:vou_logo_url,:vou_name,:vou_tel,:vou_email,:vou_address,:vou_description,
+ :crt_user, now() );
+SELECT currval('b2b.b2d_company_xid_seq') AS new_comp_xid;
 ";
 
                 NpgsqlParameter[] sqlParams = new NpgsqlParameter[]
@@ -54,7 +56,13 @@ SELECT currval('b2b.b2d_company_xid_seq') AS new_comp_xid ;
                     new NpgsqlParameter("contact_user", string.Empty),
                     new NpgsqlParameter("crt_user", "system"),
                     new NpgsqlParameter("charge_man_gender", reg.GENDER_TITLE),
-                    new NpgsqlParameter("comp_timezone", Convert.ToInt32(reg.TIMEZONE))
+                    new NpgsqlParameter("comp_timezone", Convert.ToInt32(reg.TIMEZONE)),
+                    new NpgsqlParameter("vou_logo_url", ""),
+                    new NpgsqlParameter("vou_name", reg.COMPANY_NAME),
+                    new NpgsqlParameter("vou_tel", string.Format("{0}{1}",reg.TEL_CODE,reg.TEL)),
+                    new NpgsqlParameter("vou_email", reg.EMAIL),
+                    new NpgsqlParameter("vou_address", reg.ADDRESS),
+                    new NpgsqlParameter("vou_description", "")
                 };
 
                 var new_comp_xid = NpgsqlHelper.ExecuteScalar(trans, CommandType.Text, sqlStmt, sqlParams);
