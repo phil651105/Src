@@ -20,11 +20,11 @@ namespace KKday.Web.B2D.BE.App_Code
         public static readonly Website Instance = new Website();
 
         // Postgresql ERP DB 連線方式
-        private string _ERP_DB = "";
-        public string ERP_DB
-        {
-            get { return _ERP_DB; }
-        }
+        //private string _ERP_DB = "";
+        //public string ERP_DB
+        //{
+        //    get { return _ERP_DB; }
+        //}
 
         // DI for Configuration (appsettings.cs)
         public IConfiguration Configuration { get; private set; }
@@ -50,11 +50,11 @@ namespace KKday.Web.B2D.BE.App_Code
         public void Init(IConfiguration config, IHostingEnvironment env)
         {
             this.Configuration = config;
-            this._ERP_DB = Configuration["ConnectionStrings:PostgreSQL"];
+            //this._ERP_DB = Configuration["ConnectionStrings:PostgreSQL"];
 
             _stationID = Dns.GetHostName();
 
-            NpgsqlConnection npg_conn = new NpgsqlConnection(_ERP_DB);
+            //NpgsqlConnection npg_conn = new NpgsqlConnection(_ERP_DB);
 
             LoadLog4netConfig();
 
