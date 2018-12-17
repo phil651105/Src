@@ -28,7 +28,7 @@ namespace KKday.Web.B2D.EC.AppCode
                 X509Chain chain, SslPolicyErrors sslPolicyErrors)
                 { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -82,7 +82,7 @@ namespace KKday.Web.B2D.EC.AppCode
                 X509Chain chain, SslPolicyErrors sslPolicyErrors)
                  { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -137,7 +137,7 @@ namespace KKday.Web.B2D.EC.AppCode
                 X509Chain chain, SslPolicyErrors sslPolicyErrors)
                 { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -190,7 +190,7 @@ namespace KKday.Web.B2D.EC.AppCode
            X509Chain chain, SslPolicyErrors sslPolicyErrors)
            { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -245,7 +245,7 @@ namespace KKday.Web.B2D.EC.AppCode
            X509Chain chain, SslPolicyErrors sslPolicyErrors)
            { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -291,7 +291,7 @@ namespace KKday.Web.B2D.EC.AppCode
            X509Chain chain, SslPolicyErrors sslPolicyErrors)
            { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -336,7 +336,7 @@ namespace KKday.Web.B2D.EC.AppCode
            X509Chain chain, SslPolicyErrors sslPolicyErrors)
            { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
@@ -428,7 +428,7 @@ namespace KKday.Web.B2D.EC.AppCode
                 //call.json = j;
 
                 string result;
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{pathUrl}Booking/paymentList"); ;
 
                 httpWebRequest.ContentType = "application/json";
@@ -485,7 +485,7 @@ namespace KKday.Web.B2D.EC.AppCode
            X509Chain chain, SslPolicyErrors sslPolicyErrors)
            { return true; };
 
-                var pathUrl = Website.Instance.Configuration["B2DApiUrl:apiUri"];
+                var pathUrl = Website.Instance.Configuration["WMS_API:URL"];
 
                 string result;
 
