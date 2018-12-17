@@ -7,12 +7,11 @@ using KKday.Web.B2D.BE.App_Code;
 using KKday.Web.B2D.BE.Filters;
 using KKday.Web.B2D.BE.Models.DataModel;
 using KKday.Web.B2D.EC.Models.Model.Account;
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.Order;
 using KKday.Web.B2D.BE.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using KKday.Web.B2D.Models.BE.Model.Order;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,14 +39,14 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
 
                 OrderOptionModel option = new OrderOptionModel()
                 {
-                    PAGE_SIZE = Page_Size,
-                    CURRENT_PAGE = 1
-                    //TIME_ZONE = "",
-                    //PROD_SDATE = "",
-                    //PROD_EDATE = "",
-                    //ORDER_SDATE = "",
-                    //ORDER_EDATE = "",
-                    //ORDERS = search.ORDER_NO;
+                    page_size = Page_Size,
+                    current_page = 1
+                    //time_zone = "",
+                    //prod_Sdate = "",
+                    //prod_Edate = "",
+                    //order_Sdate = "",
+                    //order_Edate = "",
+                    //orders = search.ORDER_NO;
                 };
 
                 var orders = OrderRepository.GetOrderList(UserData,option);
@@ -61,7 +60,38 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
             }
         }
 
-        // 查詢訂單
+        // 單一訂單
+        public IActionResult OrderDetail(string id)
+        {
+            //先用假訂單
+            id = "18KK112875437";
+            Dictionary<string, string> jsonData = new Dictionary<string, string>();
+
+            try
+            {
+                var aesUserData = User.FindFirst(ClaimTypes.UserData).Value;
+                var UserData = JsonConvert.DeserializeObject<B2dAccount>(AesCryptHelper.aesDecryptBase64(aesUserData, Website.Instance.AesCryptKey));
+
+                var orders = OrderRepository.GetOrderDetail(UserData, id);
+                //JObject jsonObject = JObject.Parse(orders); 
+
+                ViewData["info"] = OrderRepository.GetOrderInfo(orders["order_info"]);
+                ViewData["cus"] = OrderRepository.GetOrderCus(orders["order_cusList"]);
+                ViewData["module"] = OrderRepository.GetOrderModule(orders["order_modules"]);
+
+                jsonData.Add("status", "OK");
+                //jsonData["content"] =await this.RenderViewAsync<OrderListModel>("OrderList", orders, true);
+            }
+            catch(Exception ex)
+            {
+                jsonData.Clear();
+                jsonData.Add("status", "ERROR");
+                jsonData.Add("content", ex.Message);
+            }
+
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> SearchOrdersAsync([FromBody] OrderModel search)
         {
@@ -74,14 +104,14 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
 
                 OrderOptionModel option = new OrderOptionModel()
                 {
-                    PAGE_SIZE = Page_Size,
-                    CURRENT_PAGE = 1,
-                    TIME_ZONE = "",
-                    PROD_SDATE = "",
-                    PROD_EDATE = "",
-                    ORDER_SDATE = "",
-                    ORDER_EDATE = "",
-                    ORDERS = new string[] { "18KK12345" }
+                    page_size = Page_Size,
+                    current_page = 1,
+                    time_zone = "",
+                    prod_Sdate = "",
+                    prod_Edate = "",
+                    order_Sdate = "",
+                    order_Edate = "",
+                    orders = new string[] { "18KK12345" }
                 };
 
                 var orders = OrderRepository.GetOrderList(UserData, option);
@@ -89,7 +119,7 @@ namespace KKday.Web.B2D.BE.Areas.User.Controllers
                 jsonData.Add("status", "OK");
                 jsonData["content"] = await this.RenderViewAsync<OrderListModel>("OrderList", orders, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 jsonData.Clear();
                 jsonData.Add("status", "ERROR");

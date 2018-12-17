@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using KKday.Web.B2D.BE.AppCode.DAL.Company;
-using KKday.Web.B2D.BE.Models.Model.Company;
-using KKday.Web.B2D.BE.Models.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.Company;
+using KKday.Web.B2D.Models.BE.Model.Common;
 using Newtonsoft.Json.Linq;
 using Resources;
 using KKday.Web.B2D.BE.Areas.KKday.Models.DataModel;
-using KKday.Web.B2D.BE.Models.Model.PriceSetting;
+using KKday.Web.B2D.Models.BE.Model.PriceSetting;
 
 namespace KKday.Web.B2D.BE.Models.Repository
 {

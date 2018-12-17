@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KKday.Web.B2D.BE.Common.Models
+namespace KKday.Web.B2D.Models.BE.Model.Common
 {
     public class IApplicationUser
     {

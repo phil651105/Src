@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using KKday.Web.B2D.BE.App_Code;
-using KKday.Web.B2D.BE.Models.Model.Package;
+using KKday.Web.B2D.Models.BE.Model.Package;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -40,7 +40,7 @@ namespace KKday.Web.B2D.BE.Proxy
                         };
                        
                         string json_data = JsonConvert.SerializeObject(_params);
-                        string url = Website.Instance.Configuration["WMS_API:URL:QueryPackage"];
+                        string url =string.Format("{0}{1}",Website.Instance.Configuration["WMS_API:URL"],"Product/Querypackage");
 
                         using (HttpContent content = new StringContent(json_data))
                         {

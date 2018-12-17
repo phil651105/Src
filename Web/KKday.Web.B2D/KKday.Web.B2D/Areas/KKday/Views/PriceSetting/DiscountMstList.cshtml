@@ -1,5 +1,5 @@
-﻿@using KKday.Web.B2D.BE.Models.Model.Common
-@using KKday.Web.B2D.BE.Models.Model.PriceSetting
+﻿@using KKday.Web.B2D.Models.BE.Model.Common
+@using KKday.Web.B2D.Models.BE.Model.PriceSetting
 @using Resources
 
 @inject ILocalizer localizer
@@ -20,7 +20,7 @@ else
             <tr>
                 <th><input type="checkbox" id="checkall" /></th>
                 <th>@localizer.Text.ID</th>
-                <th>Discount Name</th> 
+                <th>Discount Name</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>@localizer.Text.Status</th>
@@ -34,7 +34,7 @@ else
                 <tr>
                     <td><input type="checkbox" class="checkthis" value="@item.XID" aria-label="Select discount" title="Select discount in this table" /></td>
                     <td><a href="#" onclick="DiscountMstEdit(@item.XID);">@item.XID</a></td>
-                    <td>@item.DISC_NAME</td> 
+                    <td>@item.DISC_NAME</td>
                     <td>@item.S_DATE.Value.ToString("yyyy-MM-dd")</td>
                     <td>@item.E_DATE.Value.ToString("yyyy-MM-dd")</td>
                     <td>@item.STATUS_DESC</td>

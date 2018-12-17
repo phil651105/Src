@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KKday.Web.B2D.BE.Commons;
-using KKday.Web.B2D.BE.Models.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.Common;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace KKday.Web.B2D.BE.Models.Repository

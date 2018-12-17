@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KKday.Web.B2D.BE.Models.Model.Company
+namespace KKday.Web.B2D.Models.BE.Model.Company
 {
     public class B2dCompany
     {

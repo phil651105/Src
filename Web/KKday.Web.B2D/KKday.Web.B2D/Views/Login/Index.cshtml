@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="~/css/simple-line-icons.css">
     <link rel="stylesheet" href="~/css/webfont/zh-tw.css">
     <link rel="stylesheet" href="~/css/main.css">
-    <link rel="stylesheet" href="~/css/login.css">
+    <link rel="stylesheet" href="~/css/pages/login.css">
 }
 
-<div class="login-body" style="background-image: url(/images/bg_login.jpg)">
+<div class="login-body">
+    @*style="background-image: url(/images/bg_login.jpg)"*@
     <div class="page-wrap login-wrap">
         <div class="container">
             <div class="row">
@@ -41,7 +42,7 @@
                             @*<a href="#" class="btn btn-primary btn-block" tabindex="4">登入</a>*@
                             <input type="button" name="login-submit" id="login-submit" tabindex="4" class="btn btn-primary btn-block" value="Log In" onclick="UserAuth();">
                             <div class="text-center mt-20">
-                                還不是會員？<a href="register.html">免費註冊</a>
+                                還不是會員？<a href="@Url.Content("~/Account/Register")">免費註冊</a>
                             </div>
                         </div>
                     </form>
@@ -51,7 +52,6 @@
         </div>
     </div>
 </div>
-
 
 @*<div class="container">
         <div class="row">

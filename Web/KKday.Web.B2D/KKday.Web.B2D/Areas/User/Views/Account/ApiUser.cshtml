@@ -1,4 +1,4 @@
-﻿@using KKday.Web.B2D.BE.Models.Model.Common
+﻿@using KKday.Web.B2D.Models.BE.Model.Common
 @using KKday.Web.B2D.EC.Models.Model.Account
 @using Resources
 @inject ILocalizer localizer
@@ -197,6 +197,7 @@
 <script type="text/javascript">
 
 $(function(){
+    $('#Menu_06').addClass("active");
     $("#mytable #checkall").click(function () {
         if ($("#mytable #checkall").is(':checked')) {
             $("#mytable input[type=checkbox]").each(function () {

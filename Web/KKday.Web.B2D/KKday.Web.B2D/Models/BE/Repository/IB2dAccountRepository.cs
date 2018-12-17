@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using KKday.Web.B2D.EC.Models.Model.Account;
-using KKday.Web.B2D.BE.Models.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.Common;
 
-namespace KKday.Web.B2D.BE.Models.Repository
+namespace KKday.Web.B2D.Models.BE.Repository
 {
     public interface IB2dAccountRepository
     {

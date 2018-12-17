@@ -60,20 +60,24 @@ namespace KKday.Web.B2D.EC.Controllers
                 //fakeContact.state = "CN";
 
                 //取挖字
-                Dictionary<string, string> uikey = CommonRepostory.getuiKey(RedisHelper,UserData.LOCALE); ;// Redishelper.getuiKey(fakeContact.lang);
+                Dictionary<string, string> uikey = CommonRepostory.getuiKey(RedisHelper, UserData.LOCALE); ;// Redishelper.getuiKey(fakeContact.lang);
                 //ProdTitleModel title = ProductRepostory.getProdTitle(uikey);
                 ProdTitleModel title = JsonConvert.DeserializeObject<ProdTitleModel>(JsonConvert.SerializeObject(uikey));
 
                 if (id == null) throw new Exception("商品不存在");
 
                 //從 api取 
-                ProductforEcModel prod = ProductRepostory.getProdDtl(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY,id, title);
+                ProductforEcModel prod = ProductRepostory.getProdDtl(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY, id, title);
 
                 if (prod.result != "0000")
                 {
-                    if (prod.result == "10001" && !prod.prod_mkt.is_ec_sale)
+                    //if (prod.result == "10001" && !prod.prod_mkt.is_ec_sale)
+                    if (prod.result == "10001")
                     {
-                        return RedirectToAction("Index", "Error", new ErrorViewModel { ErrorType = ErrorType.Invalid_Market });
+                        int strCut1 = (prod.result_msg.IndexOf("Product ERROR:", StringComparison.CurrentCulture) + "Product ERROR:".Length);
+                        int strCut2 = prod.result_msg.IndexOf(",   at", StringComparison.CurrentCulture);
+                        string errMsg = prod.result_msg.Length > 0 ? prod.result_msg.Substring(strCut1, strCut2-strCut1) : "";
+                        return RedirectToAction("Index", "Error", new ErrorViewModel { ErrorType = ErrorType.Invalid_Market, ErrorMessage = errMsg });
                     }
                     else
                     {
@@ -81,7 +85,7 @@ namespace KKday.Web.B2D.EC.Controllers
                     }
                 }
 
-                PackageModel pkgs = ProductRepostory.getProdPkg(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY,id, title);
+                PackageModel pkgs = ProductRepostory.getProdPkg(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY, id, title);
 
                 if (pkgs.result != "0000") throw new Exception(prod.result_msg);//不正確就導錯誤頁,但api還未處理怎麼回傳
 
@@ -113,7 +117,7 @@ namespace KKday.Web.B2D.EC.Controllers
                     prod.policy_list = prod.policy_list.OrderByDescending(o => o.is_over).OrderByDescending(o => o.days).ToList();
                 }
 
-                ProductModuleModel module = ProductRepostory.getProdModule(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE,  UserData.CURRENCY, id, "", title);
+                ProductModuleModel module = ProductRepostory.getProdModule(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY, id, "", title);
                 if (module != null && module.module_venue_info != null)
                 {
                     if (module.module_venue_info.venue_type == "01")
@@ -159,7 +163,7 @@ namespace KKday.Web.B2D.EC.Controllers
                 string allCanUseDate = "";
 
                 //取挖字
-                Dictionary<string, string> uikey = CommonRepostory.getuiKey(RedisHelper,UserData.LOCALE); ;// Redishelper.getuiKey(fakeContact.lang);
+                Dictionary<string, string> uikey = CommonRepostory.getuiKey(RedisHelper, UserData.LOCALE); ;// Redishelper.getuiKey(fakeContact.lang);
 
                 ProdTitleModel title = ProductRepostory.getProdTitle(uikey);
                 ViewData["prodTitle"] = title;
@@ -175,7 +179,7 @@ namespace KKday.Web.B2D.EC.Controllers
                 pkgs.pkgs = pkgs.pkgs.Where(x => nowDatetime >= Convert.ToInt64(x.online_s_date) && Convert.ToInt64(x.online_e_date) > nowDatetime).ToList();
 
                 Website.Instance.logger.Debug($"product_reflashPkg_err:{JsonConvert.SerializeObject(pkgs)}");
-                List<PkgDateforEcModel> prodPkgDateList = ProductRepostory.getProdPkgDate(pkgs,UserData.LOCALE, UserData.CURRENCY, uikey, out allCanUseDate);
+                List<PkgDateforEcModel> prodPkgDateList = ProductRepostory.getProdPkgDate(pkgs, UserData.LOCALE, UserData.CURRENCY, uikey, out allCanUseDate);
 
                 //設定每個pkg裡面可以使用的日期有那些
                 pkgs = ProductRepostory.InitPkg(prodQury, title, pkgs, prodPkgDateList);
@@ -261,7 +265,7 @@ namespace KKday.Web.B2D.EC.Controllers
                 ProdTitleModel title = JsonConvert.DeserializeObject<ProdTitleModel>(json);
                 TempData.Keep();
 
-                PkgEventsModel getEventTime = ProductRepostory.getEvent(UserData.COMPANY_XID,UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY, prodEvent.prodno, prodEvent.pkgno, title);
+                PkgEventsModel getEventTime = ProductRepostory.getEvent(UserData.COMPANY_XID, UserData.COUNRTY_CODE, UserData.LOCALE, UserData.CURRENCY, prodEvent.prodno, prodEvent.pkgno, title);
                 if (getEventTime.result == "0000")
                 {
                     var result = getEventTime.events.Where(x => x.day == prodEvent.DateSelected);

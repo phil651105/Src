@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KKday.Web.B2D.BE.Models.Model.Package
+namespace KKday.Web.B2D.Models.BE.Model.Package
 {
     // KKday 商品套餐(Package) 
 

@@ -1,4 +1,4 @@
-﻿@using KKday.Web.B2D.BE.Models.Model.Common
+﻿@using KKday.Web.B2D.Models.BE.Model.Common
 @using KKday.Web.B2D.EC.Models.Model.Account
 @using Resources
 @inject ILocalizer localizer
@@ -13,7 +13,7 @@
 }
 else
 {
-    <input type="hidden" id="xid"/>
+    <input type="hidden" id="xid" />
     <!--LIST-->
     <table class="table table-striped table-middle">
         <thead>
@@ -95,9 +95,9 @@ else
                 <h4 class="modal-title">API Key</h4>
             </div>
             <div class="modal-body break-all" id="api_key_show"><span id="loading"></span></div>
-                <div class="modal-footer text-center">
-                    <button type="button" class="btn btn-primary" onclick="UpdToken();">更新Token</button>
-                </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-primary" onclick="UpdToken();">更新Token</button>
+            </div>
         </div>
     </div>
 </div>

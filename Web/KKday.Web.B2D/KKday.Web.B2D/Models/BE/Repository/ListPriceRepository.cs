@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using KKday.Web.B2D.BE.AppCode.DAL.ListPrice; 
-using KKday.Web.B2D.BE.Models.Model.Common;
-using KKday.Web.B2D.BE.Models.Model.ListPrice;
+using KKday.Web.B2D.Models.BE.Model.Common;
+using KKday.Web.B2D.Models.BE.Model.ListPrice;
 using Newtonsoft.Json.Linq;
 using Resources;
 
-namespace KKday.Web.B2D.BE.Models.Repository
+namespace KKday.Web.B2D.Models.BE.Repository
 {
     public class ListPriceRepository
     {

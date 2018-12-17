@@ -1,4 +1,4 @@
-﻿@using KKday.Web.B2D.BE.Models.Model.Order
+﻿@using KKday.Web.B2D.Models.BE.Model.Order
 @using Resources
 
 @inject ILocalizer localizer
@@ -7,65 +7,68 @@
 }
 @model OrderListModel
 
-    <div class="col-sm-12">
-        <div class="board">
-            <div class="page-head">
-                <h1>查詢訂單</h1>
-            </div>
-            <div class="page-search">
-                <div class="row">
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label>訂單編號</label>
-                            <input type="text" id="order_no" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="form-group">
-                            <label>訂單日期</label>
-                            <div class="input-group">
-                                <input type="text" id="order_date" class="form-control has-datepicker">
-                                <span class="input-group-addon"><i class="icon-calendar icons"></i></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-5">
-                        <div class="form-group">
-                            <label>出發日期</label>
-                            <div class="input-group">
-                                <input type="text" id="prod_sdate" class="form-control has-datepicker">
-                                <span class="input-group-addon"><i class="icon-calendar icons"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2 text-right">
-                        <a href="#" class="btn btn-primary" onclick="Refresh(1, true);">查詢</a>
+<div class="col-sm-12">
+    <div class="board">
+        <div class="page-head">
+            <h1>查詢訂單</h1>
+        </div>
+        <div class="page-search">
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label>訂單編號</label>
+                        <input type="text" id="order_no" class="form-control">
                     </div>
                 </div>
             </div>
-
-            <!-- 空白狀態 -->
-            <!-- <div class="empty">
-                <div class="empty-title">
-                    <img class="empty-img" src="img/empty_list/product_list.svg">
-                    <div class="empty-title">沒有符合條件的資料！</div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>訂單日期</label>
+                        <div class="input-group">
+                            <input type="text" id="order_date" class="form-control has-datepicker">
+                            <span class="input-group-addon"><i class="icon-calendar icons"></i></span>
+                        </div>
+                    </div>
                 </div>
-            </div> -->
 
-            <div class="table-btns">
-                <a href="#" class="btn btn-default btn-xs disabled">匯出</a>
-                <a href="#" class="btn btn-danger btn-xs disabled">取消訂單</a>
-            </div>
-            <div id="list_panel" class="table-responsive">
-                @await Html.PartialAsync("OrderList", Model)
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>出發日期</label>
+                        <div class="input-group">
+                            <input type="text" id="prod_sdate" class="form-control has-datepicker">
+                            <span class="input-group-addon"><i class="icon-calendar icons"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <a href="#" class="btn btn-primary" onclick="Refresh(1, true);">查詢</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
+        <!-- 空白狀態 -->
+        <!-- <div class="empty">
+            <div class="empty-title">
+                <img class="empty-img" src="img/empty_list/product_list.svg">
+                <div class="empty-title">沒有符合條件的資料！</div>
+            </div>
+        </div> -->
+
+        <div class="table-btns">
+            <a href="#" class="btn btn-default btn-xs disabled">匯出</a>
+            <a href="#" class="btn btn-danger btn-xs disabled">取消訂單</a>
+        </div>
+        <div id="list_panel" class="table-responsive">
+            @await Html.PartialAsync("OrderList", Model)
+        </div>
+    </div>
+</div>
+
+<script>
+$(function(){
+    $('#Menu_03').addClass("active");
+});
 
 function Refresh(page, is_recount) {
 
@@ -118,17 +121,20 @@ function SearchOrder(){
         contentType: "application/json",
         data: JSON.stringify(obj),
         dataType: "json",
-        error: function (jqXHR, textStatus, errorThrown) {
-            // console.log("jqXHR => respText: " + jqXHR.responseText + ", status: " + jqXHR.status + ", readyState: " + jqXHR.readyState + ", statusText: " + jqXHR.statusText);
-            console.log("textStatus: " +textStatus + ", error: " + errorThrown);
-        },
+        error: function (data) {
+                console.log(data.responseText);
+               },
         success: function (result) {
             // console.log("result: " + JSON.stringify(result));
             if(result.status == "OK") {
                 $("#list_panel").html(result.content);
-                query_params = JSON.parse(result.query_params);
             }
         }
     });
 }
-    </script>
+
+    function GetOrderDetail(id){
+        window.location.href = _root_path + "Order/OrderDetail/" + id ;
+    }
+
+</script>
